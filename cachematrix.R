@@ -61,7 +61,7 @@ makeCacheMatrix <- function(x = matrix()) {
 # matrix, but this can be changed with the return.cached argument.
 #
 # Arguments:
-#   x               The cache matrix to find the inverse of.
+#   x               The matrix to find the inverse of.
 #   return.cached   Flag to return a cache matrix intstead of a raw matrix.  
 #                   Defaults to FALSE.
 #   ...             Additional arguments to pass to the solver that computes 
