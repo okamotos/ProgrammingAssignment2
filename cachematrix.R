@@ -21,7 +21,9 @@
 # Returns:
 #   The cache matrix representing x
 makeCacheMatrix <- function(x = matrix()) {
-  inv <- NULL
+  inv <- NULL    # the cached inverse
+  # Sets the matrix being represented to a new matrix.  
+  # This clears the cache if the new matrix is different
   set <- function(y) {
     if (!identical(x, y)) {
       x <<- y
@@ -29,9 +31,14 @@ makeCacheMatrix <- function(x = matrix()) {
     }
     x
   }
+  # Gets the raw matrix.
   get <- function()  {
     x
   }
+  # Gets the inverse of the matrix, either from the cache
+  # or with fresh calculation
+  # Argument: return.cached flag to return a cache matrix
+  #           instead of a raw matrix.
   inverse <- function(return.cached=FALSE, ...) {
     args <- list(...)
     if (is.null(inv)) {
@@ -63,6 +70,7 @@ makeCacheMatrix <- function(x = matrix()) {
 #   The raw or cache matrix with that is the inverse of 
 #   the cache matrix x.
 cacheSolve <- function(x, return.cached = FALSE, ...) {
+  # nothing to do except call the function from the cache matrix.
   x$inverse(return.cached, ...)
 }
 
