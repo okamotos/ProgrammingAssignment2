@@ -57,8 +57,8 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-# Gets the inverse of a cache matrix. By default returns a raw matrix, but
-# this can be changed with the return.cached argument.
+# Gets the inverse of a raw matrix or cache matrix. By default returns a raw 
+# matrix, but this can be changed with the return.cached argument.
 #
 # Arguments:
 #   x               The cache matrix to find the inverse of.
@@ -71,6 +71,10 @@ makeCacheMatrix <- function(x = matrix()) {
 #   the cache matrix x.
 cacheSolve <- function(x, return.cached = FALSE, ...) {
   # nothing to do except call the function from the cache matrix.
+  if (class(x) == "matrix") {
+    # someone passed in a raw matrix.  We'll wrap that for them.
+    return(makeCacheMatrix(x)$inverse(return.cached, ...))
+  }
   x$inverse(return.cached, ...)
 }
 
